@@ -5,7 +5,7 @@ const Alexa = require('ask-sdk-core');
 const questions = require('./questions');
 const i18n = require('i18next');
 const sprintf = require('i18next-sprintf-postprocessor');
-
+var regex = /(([^]+)>)/ig;
 const ANSWER_COUNT = 4;
 const GAME_LENGTH = 3;
 
@@ -127,6 +127,7 @@ function handleUserGuess(userGaveUp, handlerInput) {
 
         return responseBuilder
             .speak(speechOutput)
+            .withSimpleCard('cardTitle', 'cardContent')
             .getResponse();
     }
     currentQuestionIndex += 1;
@@ -170,7 +171,7 @@ function handleUserGuess(userGaveUp, handlerInput) {
 
     return responseBuilder.speak(speechOutput)
         .reprompt(repromptText)
-        .withSimpleCard(requestAttributes.t('GAME_NAME'), repromptText)
+        .withSimpleCard("cardtitle", "yiyle")
         .getResponse();
 }
 
@@ -217,7 +218,7 @@ function startGame(newGame, handlerInput) {
     return handlerInput.responseBuilder
         .speak(speechOutput)
         .reprompt(repromptText)
-        .withSimpleCard(requestAttributes.t('GAME_NAME'), repromptText)
+        .withSimpleCard(requestAttributes.t('GAME_NAME'), repromptText.replace(regex, "");)
         .getResponse();
 }
 
@@ -229,7 +230,7 @@ function helpTheUser(newGame, handlerInput) {
     const speechOutput = requestAttributes.t('HELP_MESSAGE', GAME_LENGTH) + askMessage;
     const repromptText = requestAttributes.t('HELP_REPROMPT') + askMessage;
 
-    return handlerInput.responseBuilder.speak(speechOutput).reprompt(repromptText).getResponse();
+    return handlerInput.responseBuilder.speak(speechOutput).reprompt(repromptText).withSimpleCard('cardTitle', 'cardContent').getResponse();
 }
 
 /* jshint -W101 */
@@ -254,7 +255,7 @@ const languageString = {
             ANSWER_WRONG_MESSAGE: "<audio src=\'https\://sufiyaan.ca/audio/lose.mp3\'/> Your answer is wrong. ",
             CORRECT_ANSWER_MESSAGE: 'The correct answer is %s\: %s. ',
             ANSWER_IS_MESSAGE: '',
-            TELL_QUESTION_MESSAGE: 'Number %s. <audio src=\'https:%s Who do you think it is? ',
+            TELL_QUESTION_MESSAGE: 'Question %s. <audio src=\'https:%s Who do you think it is? ',
             GAME_OVER_MESSAGE: 'You got %s out of %s guesses correct. Thank you for playing!',
             SCORE_IS_MESSAGE: 'Your score is %s. '
         },
@@ -317,17 +318,19 @@ const UnhandledIntent = {
             const speechOutput = requestAttributes.t('START_UNHANDLED');
             return handlerInput.attributesManager
                 .speak(speechOutput)
+                .withSimpleCard('cardTitle', 'cardContent')
                 .reprompt(speechOutput)
                 .getResponse();
         } else if (sessionAttributes.questions) {
             const speechOutput = requestAttributes.t('TRIVIA_UNHANDLED', ANSWER_COUNT.toString());
             return handlerInput.attributesManager
                 .speak(speechOutput)
+                .withSimpleCard('cardTitle', 'cardContent')
                 .reprompt(speechOutput)
                 .getResponse();
         }
         const speechOutput = requestAttributes.t('HELP_UNHANDLED');
-        return handlerInput.attributesManager.speak(speechOutput).reprompt(speechOutput).getResponse();
+        return handlerInput.attributesManager.speak(speechOutput).withSimpleCard('cardTitle', 'cardContent').reprompt(speechOutput).getResponse();
     },
 };
 
@@ -364,6 +367,7 @@ const RepeatIntent = {
     handle(handlerInput) {
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         return handlerInput.responseBuilder.speak(sessionAttributes.speechOutput)
+            .withSimpleCard('cardTitle', 'cardContent')
             .reprompt(sessionAttributes.repromptText)
             .getResponse();
     },
@@ -378,6 +382,7 @@ const YesIntent = {
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         if (sessionAttributes.questions) {
             return handlerInput.responseBuilder.speak(sessionAttributes.speechOutput)
+                .withSimpleCard('cardTitle', 'cardContent')
                 .reprompt(sessionAttributes.repromptText)
                 .getResponse();
         }
@@ -396,6 +401,7 @@ const StopIntent = {
         const speechOutput = requestAttributes.t('STOP_MESSAGE');
 
         return handlerInput.responseBuilder.speak(speechOutput)
+            .withSimpleCard('cardTitle', 'cardContent')
             .reprompt(speechOutput)
             .getResponse();
     },
@@ -410,8 +416,7 @@ const CancelIntent = {
         const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         const speechOutput = requestAttributes.t('CANCEL_MESSAGE');
 
-        return handlerInput.responseBuilder.speak(speechOutput)
-            .getResponse();
+        return handlerInput.responseBuilder.speak(speechOutput).withSimpleCard('cardTitle', 'cardContent').getResponse();
     },
 };
 
@@ -423,7 +428,7 @@ const NoIntent = {
     handle(handlerInput) {
         const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         const speechOutput = requestAttributes.t('NO_MESSAGE');
-        return handlerInput.responseBuilder.speak(speechOutput).getResponse();
+        return handlerInput.responseBuilder.speak(speechOutput).withSimpleCard('cardTitle', 'cardContent').getResponse();
     },
 };
 
@@ -436,6 +441,7 @@ const ErrorHandler = {
 
         return handlerInput.responseBuilder
             .speak('Sorry, I can\'t understand the command. Please say again.')
+            .withSimpleCard('cardTitle', 'cardContent')
             .reprompt('Sorry, I can\'t understand the command. Please say again.')
             .getResponse();
     },
