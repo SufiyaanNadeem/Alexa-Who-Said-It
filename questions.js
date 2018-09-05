@@ -88,22 +88,6 @@ module.exports = {
             ],
         },
         {
-            "//sufiyaan.ca/audio/dabangg_thapad.mp3'/>": [
-                'Sonakshi Sinha',
-                'Karishma Kapoor',
-                'Rani Mukherjee',
-                'Pretty Zinta',
-            ],
-        },
-        {
-            "//sufiyaan.ca/audio/golmaal_kareena.mp3'/>": [
-                'Kareena Kapoor',
-                'Sonam Kapoor',
-                'Kajol',
-                'Katrina Kaif',
-            ],
-        },
-        {
             "//sufiyaan.ca/audio/golmaal_kareena.mp3'/>": [
                 'Kareena Kapoor',
                 'Sonam Kapoor',
