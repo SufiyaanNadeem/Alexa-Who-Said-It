@@ -1,5 +1,5 @@
 # Alexa-Who-Said-It
-Alexa skill that plays audio clips of Bollywood celebrities and asks users to guess who is speaking. Listen to a few famous Bollywood dialogues and guess "Who Said It". From the early days of Bollywood to today, this game contains all the coolest, funniest, and most memorable dialogues that any true Bollywood fan should recognize.
+<img align="left" width="109" src="images/wsi_logo-01.png">Alexa skill that plays audio clips of Bollywood celebrities and asks users to guess who is speaking. Listen to a few famous Bollywood dialogues and guess "Who Said It". From the early days of Bollywood to today, this game contains all the coolest, funniest, and most memorable dialogues that any true Bollywood fan should recognize.
 
 - To start playing, say "Alexa, launch Who Said It".
 - Since the questions are multiple choice, just say the number corresponding to your answer.
@@ -9,3 +9,5 @@ Alexa skill that plays audio clips of Bollywood celebrities and asks users to gu
 
 ## Video Demo
 coming soon.. 
+
+## Now available in US!
