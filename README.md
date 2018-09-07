@@ -10,4 +10,4 @@
 ## Video Demo
 coming soon.. 
 
-## Now available in US!
+## Now available in English CA, US, AU, GB, and IN!
